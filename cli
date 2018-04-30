@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+# Config
+MARKETS=WETH-RDN
+WETH_TOKEN_ADDRESS=0xc58b96a0278bd2c77bc93e01b148282fb8e753a5
+ETHEREUM_RPC_URL=https://rinkeby.infura.io
+RDN_TOKEN_ADDRESS=0xde6efd396e18a950b45e24d6225505f48d0c627b
+DX_SERVICE_VERSION=develop
+
+# Get the params
+CLI_PARAMS=${@:--h}
+
+echo
+echo "  *********  Dutch X CLI - $DX_SERVICE_VERSION  *********"
+echo "    Operation: $CLI_PARAMS"
+echo "    Markets: $MARKETS"
+echo "    Ethereum Node: $ETHEREUM_RPC_URL"
+echo "  *********************************"
+echo
+
+docker run \
+  -e ETHEREUM_RPC_URL=$ETHEREUM_RPC_URL \
+  -e MARKETS=$MARKETS \
+  -e WETH_TOKEN_ADDRESS=$WETH_TOKEN_ADDRESS \
+  -e RDN_TOKEN_ADDRESS=$RDN_TOKEN_ADDRESS \
+  gnosispm/dx-services:$DX_SERVICE_VERSION \
+  npm run --silent cli -- $CLI_PARAMS
+
+# --silent

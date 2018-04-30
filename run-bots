@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+# Config
+MARKETS=WETH-RDN
+WETH_TOKEN_ADDRESS=0xc58b96a0278bd2c77bc93e01b148282fb8e753a5
+ETHEREUM_RPC_URL=https://rinkeby.infura.io
+
+echo
+echo "  *********  Dutch X Bots - $DX_SERVICE_VERSION  *********"
+echo "    Operation: $CLI_OPERATION_NAME"
+echo "    Markets: $MARKETS"
+echo "    Ethereum Node: $ETHEREUM_RPC_URL"
+echo "  *********************************"
+echo
+
+docker run \
+  -p 8081:8081 \
+  -e MNEMONIC="super secret thing that nobody should know" \
+  -e NODE_ENV=dev \
+  -e ETHEREUM_RPC_URL=https://rinkeby.infura.io \
+  -e MARKETS=WETH-RDN \
+  -e WETH_TOKEN_ADDRESS=0xc58b96a0278bd2c77bc93e01b148282fb8e753a5 \
+  -e RDN_TOKEN_ADDRESS=0xde6efd396e18a950b45e24d6225505f48d0c627b \
+  gnosispm/dx-services:develop \
+  npm run --silent bots
