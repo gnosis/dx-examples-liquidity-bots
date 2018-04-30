@@ -12,14 +12,11 @@ You can use [this one](../cli) as a template.
 
 > Remember to grant it with execution permissions:
 >
-> `chmod `+x ./cli
+> `chmod +x ./cli`
 
 ## Get started with the cli
 
-To check that the script is working, run the version command:
-
-Give execution permisions to the script:
-
+To check that the script is working, run the `version` command:
 ```bash
 ./cli --version
 ```
@@ -90,21 +87,21 @@ automatically (just the amount that is missing).
 For example, to deposit `0.8 WETH` and `1500 RDN`:
 
 ```bash
-./cli state 0.8 WETH
-./cli state 1500 RDN
+./cli deposit 0.8 WETH
+./cli deposit 1500 RDN
 ```
 
 ## Market price
 Get the market price for a token pair.
 
-For example, to show
+For example, to show the current market price for `WETH-RDN` pair:
 
 ```bash
 ./cli market-price WETH-RDN
 ```
 
 ## Sell
-Allows to create a ask in an auction.
+Allows to create a ask operation in an auction.
 
 For example, to be a seller in `WETH-RDN` with `1.2 ETH` we can execute:
 
@@ -113,7 +110,7 @@ For example, to be a seller in `WETH-RDN` with `1.2 ETH` we can execute:
 ```
 
 ## Buy
-Allows to create a bid in an auction.
+Allows to create a bid operation in an auction.
 
 For example, to be a bider in `WETH-RDN` with `500 RDN` we can execute:
 

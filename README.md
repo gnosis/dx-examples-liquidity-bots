@@ -16,7 +16,7 @@ If you follow through, you'll get:
     * To check the state of the auctions
     * To interact with the DX: Claim, buy, sell, etc.
 
-For aditional information, and for reference, check out the following 
+For aditional information and for reference, check out the following 
 repositories:
 
 * [Gnosis Blog](https://blog.gnosis.pm/tagged/dutchx): Learn about Dutch X in 
@@ -86,7 +86,7 @@ with it in the **Fund the bots** section.
 
 This script will:
 
-* Start **3** bots that will make sure the liquidity: `SellLiquidityBot`, 
+* Start **3** bots that will ensure the liquidity: `SellLiquidityBot`, 
 `BuyLiquidityBot` and `BalanceBot` (more info about these bots in
 [Dutch X Bots](./docs/bots.md)
 )
@@ -118,13 +118,6 @@ Once you have the **bot account**, your **secret mnemonic** and the
 >
 > Check out the **Deposit** section in [Dutch X Cli page](./docs/cli.md)
 
-## Specify the Ethereum RPC Node
-It's best, if you configure an ethereum node you consider reliable.
-
-You can specify the url to the node by using the `ETHEREUM_RPC_URL` environment 
-variable. Example:
-
-* **ETHEREUM_RPC_URL**: `http://localhost:8545`
 
 # Dutch X CLI (Command Line Interface)
 In the docker image, it's also avaliable a CLI, with some basic operations for 
@@ -135,7 +128,7 @@ among other things.
 
 > Checkout the cli documentation to learn how to use it.
 > * [Dutch X Cli page](./docs/cli.md)
-> * Also, you can create a **cli** script, the same way we did the `run-bots` 
+> * Also, you can create a **cli** script, the same way we did in the `run-bots` 
 > script. You can use [this one](./cli) as a template.
 
 ## State of a Dutch X Auction
@@ -152,7 +145,7 @@ We would get something similar to:
 ![alt text](./docs/img/state-of-auction.png "State of an auction")
 
 
-> For other methods, or to learn how to use the CLI go to 
+> For other methods, or to learn how to use the CLI go to:
 > * [Dutch X Cli page](./docs/cli.md)
 
 # Dutchx Bots

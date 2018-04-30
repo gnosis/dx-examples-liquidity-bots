@@ -2,7 +2,7 @@
 When we start the application, it will start also 3 bots.
 
 Every bot is createad with one goal, so once they are up, the will try to do 
-their job.
+their jobs.
 
 # Sell Liquidity Bot
 This bot will make sure we meet the minimun liquidity required
@@ -12,7 +12,14 @@ In other words, it makes sure the auction starts automatically filling the
 missing sell volume.
 
 The smart contract won't start the auction, unless we have more than
-`$1.000` woth of the sell token.
+`$1.000` woth of the sell token, so this bot fill the missing difference.
+
+## When will this bot ensure the sell liquidity?
+It will ensure it as soon as both of the oposite auctions clear for a token pair.
+
+## Which of the two auctions it will fund?
+It will fund the one with the highest funding, so it has to fill with less worh
+of tokens.
 
 # Buy Liquidity Bot
 This bot will make sure the auction closes when we reach the market price.
@@ -26,22 +33,22 @@ is at a right price.
 ## How does the bot know what is the market price?
 Right now the buy bot can check in any of these exchanges:
 
-* binance
-* huobi
-* kraken
-* bitfinex
+* [binance](https://www.binance.com)
+* [huobi](https://www.huobi.pro/es-es/)
+* [kraken](https://www.kraken.com/)
+* [bitfinex](https://www.bitfinex.com/)
 
 Depending on the token pair, we can configure an strategy for getting the 
 market price.
 
-## Strategies for getting the price
-The current strategy implemented by the bots is called `sequence`, but more
+## Strategies for getting the price - Sequence
+The current strategy implemented by the buy bot is called `sequence`, but more
 strategies could be implemented for future versions.
 
 For example, we could configure the bots with the following strategies:
 ```js
 const EXCHANGE_PRICE_FEED_STRATEGIES_DEFAULT = {
-  strategy: 'sequence', // TODO: More strategies can be implemented. i.e. averages, median, ponderated volumes, ...
+  strategy: 'sequence',
   feeds: ['binance', 'huobi', 'kraken', 'bitfinex']
 }
 
@@ -69,15 +76,15 @@ example we could use the trade volume to help us decide.
 ## Buy liquidity rules
 Another important part of the buy liquidity bot, is the buy rules.
 
-These riles allow the bot to decide how much they should buy, and in what 
+These rules allow the bot to decide how much they should buy, and in what 
 pricise moment.
 
 For example, we could define these rules:
-* Ensure that `1/3` of the sell volume is bought when the **price equals the 
+* Ensure that **1/3 of the sell volume** is bought when the **price equals the 
 market price**.
-* Ensure that `2/3` of the sell volume is bought when the **price is 2% below
+* Ensure that **2/3 of the sell volume** is bought when the **price is 2% below
 the market price**.
-* Ensure that the wholesell volume is bought when the **price is 4% below
+* Ensure that **the whole sell volume** is bought when the **price is 4% below
 the market price**.
 
 This rules can be specified using this configuration:
@@ -123,7 +130,7 @@ const BUY_LIQUIDITY_RULES = [
 ```
 
 # CheckBalanceBot
-The liquidity bots are very useful, but in order to operate, the need to have
+The liquidity bots are very useful, but in order to operate, they need to have
 enough tokens to perform the bids and asks, and also some Ether so they can 
 pay the gas costs for the transactions.
 
@@ -134,7 +141,7 @@ warning message when we are below the defined theshold.
 > mail.
 
 # Balance thresholds
-For example, the rules could be:
+For example, the rules could be, notify if we are below:
 * `$5000` worth of any tokens
 * `0.4 Ether`
 
