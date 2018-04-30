@@ -19,9 +19,14 @@ If you follow through, you'll get:
 For aditional information, and for reference, check out the following 
 repositories:
 
-* `dx-contracts`: Smart contracts of the Duch X
-* `dx-services`: Services, repositories and bots to interact with DX.
-* `dx-react`: Front end web application for the Dutch X seller interface
+* [Gnosis Blog](https://blog.gnosis.pm/tagged/dutchx): Learn about Dutch X in 
+Gnosis Blog, were you will find a series of posts about it.
+* [Github: dx-contracts](https://github.com/gnosis/dx-contracts): Smart 
+contracts of the Duch X
+* [Github: dx-services](https://github.com/gnosis/dx-services): Services, 
+repositories and bots to interact with DX.
+* [Github: dx-react](https://github.com/gnosis/dx-react): Front end web 
+application for the Dutch X seller interface
 
 # Run the bots
 **Create the running script**:
