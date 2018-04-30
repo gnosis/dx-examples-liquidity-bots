@@ -116,8 +116,7 @@ Once you have the **bot account**, your **secret mnemonic** and the
 
 > The easiest way is to use the **Dutch X CLI**.
 >
-> Check out the **Funding** section 
-in [Dutch X Cli page](./docs/cli.md)
+> Check out the **Deposit** section in [Dutch X Cli page](./docs/cli.md)
 
 ## Specify the Ethereum RPC Node
 It's best, if you configure an ethereum node you consider reliable.
@@ -128,15 +127,16 @@ variable. Example:
 * **ETHEREUM_RPC_URL**: `http://localhost:8545`
 
 # Dutch X CLI (Command Line Interface)
-In the docker image, it's also avaliable a CLI, with
-some basic operations for using the Dutch X.
+In the docker image, it's also avaliable a CLI, with some basic operations for 
+using the Dutch X.
 
 You can use it for getting the state of a token pair, or to trade in an auction
 among other things.
 
 > Checkout the cli documentation to learn how to use it.
 > * [Dutch X Cli page](./docs/cli.md)
-
+> * Also, you can create a **cli** script, the same way we did the `run-bots` 
+> script. You can use [this one](./cli) as a template.
 
 ## State of a Dutch X Auction
 There's a basic command in the CLI that is very helpful to get the state of the
