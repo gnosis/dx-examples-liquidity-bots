@@ -21,7 +21,7 @@ repositories:
 
 * [Gnosis Blog](https://blog.gnosis.pm/tagged/dutchx): Learn about Dutch X in 
 Gnosis Blog, were you will find a series of posts about it.
-* [Github: dx-examples-liquidity-bots](https://github.com/gnosis/dx-examples-api): 
+* [Github: dx-examples-api](https://github.com/gnosis/dx-examples-api): 
 Example project and documentation on how to use the Dutch X API.
 * [Github: dx-contracts](https://github.com/gnosis/dx-contracts): Smart 
 contracts of the Duch X
@@ -45,7 +45,7 @@ docker run \
   -e WETH_TOKEN_ADDRESS=0xc58b96a0278bd2c77bc93e01b148282fb8e753a5 \
   -e RDN_TOKEN_ADDRESS=0x7e2331beaec0ded82866f4a1388628322c8d5af0 \
   -e NODE_ENV=dev \
-  gnosispm/dx-services:develop \
+  gnosispm/dx-services:staging \
   npm run bots
 
 
