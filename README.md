@@ -1,12 +1,12 @@
-# Run Bots - Dutch X
-This is just a simple project that shows how to run the Dutch X bots to ensure 
+# Run Bots - DutchX
+This is just a simple project that shows how to run the DutchX bots to ensure 
 liquidity for any ERC20 token pair list.
 
 To make it easier, we provide a `Docker` image with all the **bots** and a 
 **CLI**.
 
 Follow through this document to run your own bots and learn how to operate on
-the Dutch Exchange.
+the DutchX.
 
 If you follow through, you'll get:
 
@@ -19,16 +19,16 @@ If you follow through, you'll get:
 For aditional information and for reference, check out the following 
 repositories:
 
-* [Gnosis Blog](https://blog.gnosis.pm/tagged/dutchx): Learn about Dutch X in 
+* [Gnosis Blog](https://blog.gnosis.pm/tagged/dutchx): Learn about DutchX in 
 Gnosis Blog, were you will find a series of posts about it.
 * [Github: dx-examples-api](https://github.com/gnosis/dx-examples-api): 
-Example project and documentation on how to use the Dutch X API.
+Example project and documentation on how to use the DutchX API.
 * [Github: dx-contracts](https://github.com/gnosis/dx-contracts): Smart 
 contracts of the Duch X
 * [Github: dx-services](https://github.com/gnosis/dx-services): Services, 
 repositories and bots to interact with DX.
 * [Github: dx-react](https://github.com/gnosis/dx-react): Front end web 
-application for the Dutch X seller interface
+application for the DutchX seller interface
 
 # Run the bots
 **Create the running script**:
@@ -90,7 +90,7 @@ This script will:
 
 * Start **3** bots that will ensure the liquidity: `SellLiquidityBot`, 
 `BuyLiquidityBot` and `BalanceBot` (more info about these bots in
-[Dutch X Bots](./docs/bots.md)
+[DutchX Bots](./docs/bots.md)
 )
 * Runs a simple API server that exposes basic information: 
 [http://localhost:8081]()
@@ -99,7 +99,7 @@ This script will:
 The bots automatically participate in the auctions performing bids and asks when
 the time is right.
 
-In order to do this bids and asks, they need to have a balance in the `Dutch X` 
+In order to do this bids and asks, they need to have a balance in the `DutchX` 
 smart contract.
 
 For founding the bots, we need to know their Ethereum address, this is 
@@ -116,24 +116,24 @@ You should see among other information, the accounts used by the bots:
 Once you have the **bot account**, your **secret mnemonic** and the 
 **bots running**, you are all set for the funding.
 
-> The easiest way is to use the **Dutch X CLI**.
+> The easiest way is to use the **DutchX CLI**.
 >
-> Check out the **Deposit** section in [Dutch X Cli page](./docs/cli.md)
+> Check out the **Deposit** section in [DutchX Cli page](./docs/cli.md)
 
 
-# Dutch X CLI (Command Line Interface)
+# DutchX CLI (Command Line Interface)
 In the docker image, it's also avaliable a CLI, with some basic operations for 
-using the Dutch X.
+using the DutchX.
 
 You can use it for getting the state of a token pair, or to trade in an auction
 among other things.
 
 > Checkout the cli documentation to learn how to use it.
-> * [Dutch X Cli page](./docs/cli.md)
+> * [DutchX Cli page](./docs/cli.md)
 > * Also, you can create a **cli** script, the same way we did in the `run-bots` 
 > script. You can use [this one](./cli) as a template.
 
-## State of a Dutch X Auction
+## State of a DutchX Auction
 There's a basic command in the CLI that is very helpful to get the state of the
 auctions.
 
@@ -148,7 +148,7 @@ We would get something similar to:
 
 
 > For other methods, or to learn how to use the CLI go to:
-> * [Dutch X Cli page](./docs/cli.md)
+> * [DutchX Cli page](./docs/cli.md)
 
 # Dutchx Bots
 There are 3 bots:
@@ -158,7 +158,7 @@ There are 3 bots:
 * `CheckBakanceBot`
 
 Find out more about them in:
-* [Dutch X Bots page](./docs/bots.md)
+* [DutchX Bots page](./docs/bots.md)
 
 # Debug
 To increase the debug level, you can change the bot script to run with 

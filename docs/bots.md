@@ -1,4 +1,4 @@
-# Dutch X Bots
+# DutchX Bots
 When we start the application, it will start also 3 bots.
 
 Every bot is createad with one goal, so once they are up, the will try to do 

@@ -11,7 +11,7 @@ DX_SERVICE_VERSION=staging
 CLI_PARAMS=${@:--h}
 
 echo
-echo "  *********  Dutch X CLI - $DX_SERVICE_VERSION  *********"
+echo "  *********  DutchX CLI - $DX_SERVICE_VERSION  *********"
 echo "    Operation: $CLI_PARAMS"
 echo "    Markets: $MARKETS"
 echo "    Ethereum Node: $ETHEREUM_RPC_URL"

@@ -6,7 +6,7 @@ WETH_TOKEN_ADDRESS=0xc58b96a0278bd2c77bc93e01b148282fb8e753a5
 ETHEREUM_RPC_URL=https://rinkeby.infura.io
 
 echo
-echo "  *********  Dutch X Bots - $DX_SERVICE_VERSION  *********"
+echo "  *********  DutchX Bots - $DX_SERVICE_VERSION  *********"
 echo "    Operation: $CLI_OPERATION_NAME"
 echo "    Markets: $MARKETS"
 echo "    Ethereum Node: $ETHEREUM_RPC_URL"

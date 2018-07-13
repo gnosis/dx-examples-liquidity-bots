@@ -1,6 +1,6 @@
-# Dutch X Cli (Command Line Interface)
+# DutchX Cli (Command Line Interface)
 In the docker image, it's also avaliable a CLI, with some basic operations for 
-using the Dutch X.
+using the DutchX.
 
 You can use it for getting the state of a token pair, or to trade in an auction
 among other things.
@@ -67,15 +67,15 @@ For example, to get the state of the `WETH-RDN` token pair:
 ```
 
 ## Deposit
-Allows you to deposit tokens in the Dutch X, so you have balance to operate on 
+Allows you to deposit tokens in the DutchX, so you have balance to operate on 
 it.
 
 To fund the bots, it's important to use this function. 
 
 This operation does two things:
-* It invokes the `approve` operation of the ERC20 token to allow the Dutch X 
+* It invokes the `approve` operation of the ERC20 token to allow the DutchX 
 contract to use the funds for the specified amount.
-* It invokes the `deposit` operation of the Dutch X contract, so the contract
+* It invokes the `deposit` operation of the DutchX contract, so the contract
 adds the tokens into the user's balance.
 
 There's a special consideration if the token is `WETH` (Wrapped Ether).
