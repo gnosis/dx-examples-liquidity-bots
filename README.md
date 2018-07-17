@@ -1,3 +1,7 @@
+<p align="center">
+  <img width="350px" src="http://dutchx.readthedocs.io/en/latest/_static/DutchX-logo_blue.svg" />
+</p>
+
 # Run Bots - DutchX
 This is just a simple project that shows how to run the DutchX bots to ensure 
 liquidity for any ERC20 token pair list.
