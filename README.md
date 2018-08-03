@@ -3,10 +3,10 @@
 </p>
 
 # Run Bots - DutchX
-This is just a simple project that shows how to run the DutchX bots to ensure 
+This is just a simple project that shows how to run the DutchX bots to ensure
 liquidity for any ERC20 token pair list.
 
-To make it easier, we provide a `Docker` image with all the **bots** and a 
+To make it easier, we provide a `Docker` image with all the **bots** and a
 **CLI**.
 
 Follow through this document to run your own bots and learn how to operate on
@@ -14,28 +14,111 @@ the DutchX.
 
 If you follow through, you'll get:
 
-* The liquiditity bots, up and running
+* The liquidity bots, up and running
 * You'll known how to fund them so they can operate
 * You'll learn how to use the CLI (command line interface)
     * To check the state of the auctions
     * To interact with the DX: Claim, buy, sell, etc.
 
-For aditional information and for reference, check out the following 
+For additional information and for reference, check out the following
 repositories:
 
-* [Gnosis Blog](https://blog.gnosis.pm/tagged/dutchx): Learn about DutchX in 
+* [Gnosis Blog](https://blog.gnosis.pm/tagged/dutchx): Learn about DutchX in
 Gnosis Blog, were you will find a series of posts about it.
-* [Github: dx-examples-api](https://github.com/gnosis/dx-examples-api): 
+* [Github: dx-examples-api](https://github.com/gnosis/dx-examples-api):
 Example project and documentation on how to use the DutchX API.
-* [Github: dx-contracts](https://github.com/gnosis/dx-contracts): Smart 
+* [Github: dx-contracts](https://github.com/gnosis/dx-contracts): Smart
 contracts of the Duch X
-* [Github: dx-services](https://github.com/gnosis/dx-services): Services, 
+* [Github: dx-services](https://github.com/gnosis/dx-services): Services,
 repositories and bots to interact with DX.
-* [Github: dx-react](https://github.com/gnosis/dx-react): Front end web 
+* [Github: dx-react](https://github.com/gnosis/dx-react): Front end web
 application for the DutchX seller interface
 
 # Run the bots
 **Create the running script**:
+Create a config file for the bots:
+```javascript
+const MARKETS = [
+  { tokenA: 'WETH', tokenB: 'RDN' }
+]
+const BUY_LIQUIDITY_RULES_DEFAULT = [
+  // Buy 1/2 if price falls below 99%
+
+  {
+    marketPriceRatio: {
+      numerator: 99,
+      denominator: 100
+    },
+    buyRatio: {
+      numerator: 1,
+      denominator: 2
+    }
+  },
+
+  // Buy the 100% if price falls below 96%
+  {
+    marketPriceRatio: {
+      numerator: 96,
+      denominator: 100
+    },
+    buyRatio: {
+      numerator: 1,
+      denominator: 1
+    }
+  }
+]
+
+const MAIN_BOT_ACCOUNT = 0
+
+const BUY_LIQUIDITY_BOTS = [{
+  name: 'Main buyer bot',
+  markets: MARKETS,
+  accountIndex: MAIN_BOT_ACCOUNT,
+  rules: BUY_LIQUIDITY_RULES_DEFAULT,
+  notifications: [{
+    type: 'slack',
+    channel: '' // If none provided uses SLACK_CHANNEL_BOT_TRANSACTIONS
+  }]
+}]
+
+const SELL_LIQUIDITY_BOTS = [{
+  name: 'Main seller bot',
+  markets: MARKETS,
+  accountIndex: MAIN_BOT_ACCOUNT,
+  notifications: [{
+    type: 'slack',
+    channel: '' // If none provided uses SLACK_CHANNEL_BOT_TRANSACTIONS
+  }]
+}]
+
+module.exports = {
+  MARKETS,
+  BUY_LIQUIDITY_RULES_DEFAULT,
+  MAIN_BOT_ACCOUNT,
+  BUY_LIQUIDITY_BOTS,
+  SELL_LIQUIDITY_BOTS
+}
+```
+
+* `MARKETS`: List of the ERC20 token pairs you want the bots to watch.
+  * Format: `<token1>-<token2>[,<tokenN>-<tokenM>]*`
+  * Example: `WETH-RDN,WETH-OMG`
+  * It's important that for every distinct token provided, you also provide the
+  address, the can be passed either in the config file or as ENV_VAR as we will see later:
+  * **WETH_TOKEN_ADDRESS**: `0xc58b96a0278bd2c77bc93e01b148282fb8e753a5`
+  * **RDN_TOKEN_ADDRESS**: `0x3615757011112560521536258c1e7325ae3b48ae`
+  * **OMG_TOKEN_ADDRESS**: `0x00df91984582e6e96288307e9c2f20b38c8fece9`
+* `MAIN_BOT_ACCOUNT`:
+  * Select the main bot account (account index of the ones generated from the `MNEMONIC`)
+  * The main bot account that will be used to generate reports
+* `BUY_LIQUIDITY_BOTS`:
+  * **name**: The name to display in notifications and messages
+  * **markets**: An object selecting the markets to watch (explained above)
+  * **accountIndex**: The accountIndex from the accounts generated from the `MNEMONIC` that is going to be used by this bot
+  * **rules**: The rules to indicate the bot when to do buys
+  * **notifications**: The notification system to be used by the bot. For now only `slack` is available
+* `SELL_LIQUIDITY_BOTS`: Same parameters as `BUY_LIQUIDITY_BOTS` except the don't need **rules**
+
 Create a script `run-bots` with the following content:
 
 ```bash
@@ -45,10 +128,12 @@ docker run \
   -p 8081:8081 \
   -e MNEMONIC="super secret thing that nobody should know" \
   -e ETHEREUM_RPC_URL=https://rinkeby.infura.io \
-  -e MARKETS=WETH-RDN \
   -e WETH_TOKEN_ADDRESS=0xc58b96a0278bd2c77bc93e01b148282fb8e753a5 \
   -e RDN_TOKEN_ADDRESS=0x3615757011112560521536258c1e7325ae3b48ae \
   -e NODE_ENV=dev \
+  -e NETWORK=rinkeby \
+  --mount source=./conf,destination=/usr/src/app/custom_conf \
+  -e CONFIG_FILE=/usr/src/app/custom_conf/bots.js \
   gnosispm/dx-services:staging \
   npm run bots
 
@@ -63,26 +148,26 @@ docker run \
 
 Fill the environment variables with your own configuration:
 
-* `MNEMONIC`: 
-  * Use your secret BIP39 mnemomic. 
-  * The bot address will be the first 
+* `MNEMONIC`:
+  * Use your secret BIP39 mnemomic.
+  * The bot address will be the first
 account generated by that mnemonic.
-* `ETHEREUM_RPC_URL`: 
+* `ETHEREUM_RPC_URL`:
   * Url for a Ethereum node
-  * You can use your own node or setup infura for example: 
+  * You can use your own node or setup infura for example:
   `https://rinkeby.infura.io`
 * `MARKETS`: List of the ERC20 token pairs you want the bots to watch.
   * Format: `<token1>-<token2>[,<tokenN>-<tokenM>]*`
     * Example: `WETH-RDN,WETH-OMG`
   * It's important that for every distinct token provided, you also provide the
-    addresse, in the case of the previous example:
+    addresses, in the case of the previous example:
     * **WETH_TOKEN_ADDRESS**: `0xc58b96a0278bd2c77bc93e01b148282fb8e753a5`
     * **RDN_TOKEN_ADDRESS**: `0x3615757011112560521536258c1e7325ae3b48ae`
     * **OMG_TOKEN_ADDRESS**: `0x00df91984582e6e96288307e9c2f20b38c8fece9`
-* `NODE_ENV`: 
+* `NODE_ENV`:
   * Optional, `local` is the default
   * Can be one of the following: `local`, `dev`, `pre` or `pro`
-  
+
 When you run it for the first time, you should see something similar to:
 
 ![alt text](./docs/img/run-docker.png "Run the bots with docker")
@@ -92,21 +177,21 @@ with it in the **Fund the bots** section.
 
 This script will:
 
-* Start **3** bots that will ensure the liquidity: `SellLiquidityBot`, 
+* Start **3** bots that will ensure the liquidity: `SellLiquidityBot`,
 `BuyLiquidityBot` and `BalanceBot` (more info about these bots in
 [DutchX Bots](./docs/bots.md)
 )
-* Runs a simple API server that exposes basic information: 
+* Runs a simple API server that exposes basic information:
 [http://localhost:8081]()
 
 # Fund the bots
 The bots automatically participate in the auctions performing bids and asks when
 the time is right.
 
-In order to do this bids and asks, they need to have a balance in the `DutchX` 
+In order to do this bids and asks, they need to have a balance in the `DutchX`
 smart contract.
 
-For founding the bots, we need to know their Ethereum address, this is 
+For founding the bots, we need to know their Ethereum address, this is
 determined by the secret mnemonic you've used to run the bots.
 
 An easy way to know the address is just to visit the about endpoint:
@@ -117,7 +202,7 @@ You should see among other information, the accounts used by the bots:
 
 ![alt text](./docs/img/bot-account.png "Get the account of the bors")
 
-Once you have the **bot account**, your **secret mnemonic** and the 
+Once you have the **bot account**, your **secret mnemonic** and the
 **bots running**, you are all set for the funding.
 
 > The easiest way is to use the **DutchX CLI**.
@@ -126,7 +211,7 @@ Once you have the **bot account**, your **secret mnemonic** and the
 
 
 # DutchX CLI (Command Line Interface)
-In the docker image, it's also avaliable a CLI, with some basic operations for 
+In the docker image, it's also avaliable a CLI, with some basic operations for
 using the DutchX.
 
 You can use it for getting the state of a token pair, or to trade in an auction
@@ -134,7 +219,7 @@ among other things.
 
 > Checkout the cli documentation to learn how to use it.
 > * [DutchX Cli page](./docs/cli.md)
-> * Also, you can create a **cli** script, the same way we did in the `run-bots` 
+> * Also, you can create a **cli** script, the same way we did in the `run-bots`
 > script. You can use [this one](./cli) as a template.
 
 ## State of a DutchX Auction
@@ -165,7 +250,7 @@ Find out more about them in:
 * [DutchX Bots page](./docs/bots.md)
 
 # Debug
-To increase the debug level, you can change the bot script to run with 
+To increase the debug level, you can change the bot script to run with
 `run bots-dev` instead of `run bots`.
 
 > Don't forget to change it back for the production script.

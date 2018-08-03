@@ -1,11 +1,11 @@
 # DutchX Cli (Command Line Interface)
-In the docker image, it's also avaliable a CLI, with some basic operations for 
+In the docker image, it's also available a CLI, with some basic operations for
 using the DutchX.
 
 You can use it for getting the state of a token pair, or to trade in an auction
 among other things.
 
-## Create a script for the cli
+## Create a script for the CLI
 It's simpler to use, if we just create a basic script.
 
 You can use [this one](../cli) as a template.
@@ -14,7 +14,7 @@ You can use [this one](../cli) as a template.
 >
 > `chmod +x ./cli`
 
-## Get started with the cli
+## Get started with the CLI
 
 To check that the script is working, run the `version` command:
 ```bash
@@ -67,19 +67,19 @@ For example, to get the state of the `WETH-RDN` token pair:
 ```
 
 ## Deposit
-Allows you to deposit tokens in the DutchX, so you have balance to operate on 
+Allows you to deposit tokens in the DutchX, so you have balance to operate on
 it.
 
-To fund the bots, it's important to use this function. 
+To fund the bots, it's important to use this function.
 
 This operation does two things:
-* It invokes the `approve` operation of the ERC20 token to allow the DutchX 
+* It invokes the `approve` operation of the ERC20 token to allow the DutchX
 contract to use the funds for the specified amount.
 * It invokes the `deposit` operation of the DutchX contract, so the contract
 adds the tokens into the user's balance.
 
 There's a special consideration if the token is `WETH` (Wrapped Ether).
-* If the token is WETH, it will check if the user has enough balance on the 
+* If the token is WETH, it will check if the user has enough balance on the
 ERC20 token to invoke the `approve` function, if it doesn't it will wrap ether
 automatically (just the amount that is missing).
 

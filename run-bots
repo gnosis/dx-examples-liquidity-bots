@@ -4,6 +4,14 @@
 MARKETS=WETH-RDN
 WETH_TOKEN_ADDRESS=0xc58b96a0278bd2c77bc93e01b148282fb8e753a5
 ETHEREUM_RPC_URL=https://rinkeby.infura.io
+NETWORK=rinkeby
+
+echo
+echo "  Getting latest STAGING version..."
+echo "  *********************************"
+echo
+
+docker pull gnosispm/dx-services:staging
 
 echo
 echo "  *********  DutchX Bots - $DX_SERVICE_VERSION  *********"
@@ -17,9 +25,12 @@ docker run \
   -p 8081:8081 \
   -e MNEMONIC="super secret thing that nobody should know" \
   -e NODE_ENV=dev \
+  -e NETWORK=$NETWORK \
   -e ETHEREUM_RPC_URL=https://rinkeby.infura.io \
   -e MARKETS=WETH-RDN \
   -e WETH_TOKEN_ADDRESS=0xc58b96a0278bd2c77bc93e01b148282fb8e753a5 \
   -e RDN_TOKEN_ADDRESS=0x3615757011112560521536258c1e7325ae3b48ae \
+  --mount type=bind,source="$(pwd)"/conf,destination=/usr/src/app/custom_conf \
+  -e CONFIG_FILE=/usr/src/app/custom_conf/bots.js \
   gnosispm/dx-services:staging \
   npm run --silent bots
