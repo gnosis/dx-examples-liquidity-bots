@@ -132,7 +132,7 @@ docker run \
   -e RDN_TOKEN_ADDRESS=0x3615757011112560521536258c1e7325ae3b48ae \
   -e NODE_ENV=dev \
   -e NETWORK=rinkeby \
-  --mount source=./conf,destination=/usr/src/app/custom_conf \
+  --mount type=bind,source="$(pwd)"/conf,destination=/usr/src/app/custom_conf \
   -e CONFIG_FILE=/usr/src/app/custom_conf/bots.js \
   gnosispm/dx-services:staging \
   npm run bots
