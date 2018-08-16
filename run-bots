@@ -2,7 +2,7 @@
 
 # Config
 MARKETS=WETH-RDN
-WETH_TOKEN_ADDRESS=0xc58b96a0278bd2c77bc93e01b148282fb8e753a5
+WETH_TOKEN_ADDRESS=0xc778417e063141139fce010982780140aa0cd5ab
 ETHEREUM_RPC_URL=https://rinkeby.infura.io
 NETWORK=rinkeby
 
@@ -28,7 +28,7 @@ docker run \
   -e NETWORK=$NETWORK \
   -e ETHEREUM_RPC_URL=https://rinkeby.infura.io \
   -e MARKETS=WETH-RDN \
-  -e WETH_TOKEN_ADDRESS=0xc58b96a0278bd2c77bc93e01b148282fb8e753a5 \
+  -e WETH_TOKEN_ADDRESS=0xc778417e063141139fce010982780140aa0cd5ab \
   -e RDN_TOKEN_ADDRESS=0x3615757011112560521536258c1e7325ae3b48ae \
   --mount type=bind,source="$(pwd)"/conf,destination=/usr/src/app/custom_conf \
   -e CONFIG_FILE=/usr/src/app/custom_conf/bots.js \

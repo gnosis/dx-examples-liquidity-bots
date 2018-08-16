@@ -105,7 +105,7 @@ module.exports = {
   * Example: `WETH-RDN,WETH-OMG`
   * It's important that for every distinct token provided, you also provide the
   address, the can be passed either in the config file or as ENV_VAR as we will see later:
-  * **WETH_TOKEN_ADDRESS**: `0xc58b96a0278bd2c77bc93e01b148282fb8e753a5`
+  * **WETH_TOKEN_ADDRESS**: `0xc778417e063141139fce010982780140aa0cd5ab`
   * **RDN_TOKEN_ADDRESS**: `0x3615757011112560521536258c1e7325ae3b48ae`
   * **OMG_TOKEN_ADDRESS**: `0x00df91984582e6e96288307e9c2f20b38c8fece9`
 * `MAIN_BOT_ACCOUNT`:
@@ -128,7 +128,7 @@ docker run \
   -p 8081:8081 \
   -e MNEMONIC="super secret thing that nobody should know" \
   -e ETHEREUM_RPC_URL=https://rinkeby.infura.io \
-  -e WETH_TOKEN_ADDRESS=0xc58b96a0278bd2c77bc93e01b148282fb8e753a5 \
+  -e WETH_TOKEN_ADDRESS=0xc778417e063141139fce010982780140aa0cd5ab \
   -e RDN_TOKEN_ADDRESS=0x3615757011112560521536258c1e7325ae3b48ae \
   -e NODE_ENV=dev \
   -e NETWORK=rinkeby \
@@ -139,7 +139,7 @@ docker run \
 
 
 #   -e MARKETS=WETH-RDN,WETH-OMG \
-#   -e WETH_TOKEN_ADDRESS=0xc58b96a0278bd2c77bc93e01b148282fb8e753a5 \
+#   -e WETH_TOKEN_ADDRESS=0xc778417e063141139fce010982780140aa0cd5ab \
 #   -e RDN_TOKEN_ADDRESS=0x3615757011112560521536258c1e7325ae3b48ae \
 #   -e OMG_TOKEN_ADDRESS=0x00df91984582e6e96288307e9c2f20b38c8fece9
 ```
