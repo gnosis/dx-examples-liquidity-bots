@@ -1,36 +1,55 @@
 #!/usr/bin/env bash
 
 # Config
-MARKETS=WETH-RDN
-WETH_TOKEN_ADDRESS=0xc58b96a0278bd2c77bc93e01b148282fb8e753a5
+DX_SERVICE_VERSION=staging # Check: https://hub.docker.com/r/gnosispm/dx-services/tags/
+MNEMONIC="super secret thing that nobody should know"
 ETHEREUM_RPC_URL=https://rinkeby.infura.io
 NETWORK=rinkeby
+ENVIRONMENT=pre # local, pre, pro
+SHOW_COLORS=true
+#DEBUG_MESSAGES=DEBUG=ERROR-*,WARN-*,INFO-*,DEBUG-*
+DEBUG_MESSAGES=DEBUG=ERROR-*,WARN-*,INFO-*
 
-echo
-echo "  Getting latest STAGING version..."
-echo "  *********************************"
-echo
+# Markets info
+#WETH_TOKEN_ADDRESS=
+#RDN_TOKEN_ADDRESS=
 
-docker pull gnosispm/dx-services:staging
+# NOTE:
+#   - All the config is in conf/bots.js
+#   - The bots have some default config, but it can be overrided using that file
+CONF_DIR=conf
+CONF_FILE_NAME=bots.js
+
+DOCKER_IMAGE="gnosispm/dx-services:$DX_SERVICE_VERSION"
+
 
 echo
 echo "  *********  DutchX Bots - $DX_SERVICE_VERSION  *********"
-echo "    Operation: $CLI_OPERATION_NAME"
-echo "    Markets: $MARKETS"
-echo "    Ethereum Node: $ETHEREUM_RPC_URL"
+echo "    Docker image: $DOCKER_IMAGE"
+echo "    Config file: ./$CONF_DIR/$CONF_FILE_NAME"
 echo "  *********************************"
 echo
+echo "[bots] Getting docker image: $DOCKER_IMAGE..."
+docker pull $DOCKER_IMAGE
 
+echo
+echo "[bots] Running bots..."
+CONTAINER_CONF_DIR=/usr/src/app/custom_conf
 docker run \
   -p 8081:8081 \
-  -e MNEMONIC="super secret thing that nobody should know" \
-  -e NODE_ENV=dev \
-  -e NETWORK=$NETWORK \
-  -e ETHEREUM_RPC_URL=https://rinkeby.infura.io \
-  -e MARKETS=WETH-RDN \
-  -e WETH_TOKEN_ADDRESS=0xc58b96a0278bd2c77bc93e01b148282fb8e753a5 \
-  -e RDN_TOKEN_ADDRESS=0x3615757011112560521536258c1e7325ae3b48ae \
-  --mount type=bind,source="$(pwd)"/conf,destination=/usr/src/app/custom_conf \
-  -e CONFIG_FILE=/usr/src/app/custom_conf/bots.js \
-  gnosispm/dx-services:staging \
-  npm run --silent bots
+  -e MNEMONIC="$MNEMONIC" \
+  -e NETWORK="$NETWORK" \
+  -e ETHEREUM_RPC_URL=$ETHEREUM_RPC_URL \
+  -e NODE_ENV=$ENVIRONMENT \
+  -e DEBUG=$DEBUG_MESSAGES \
+  -e NODE_ENV=$ENVIRONMENT \
+  -e DEBUG_COLORS=$SHOW_COLORS \
+  --mount type=bind,source="$(pwd)"/$CONF_DIR,destination=$CONTAINER_CONF_DIR \
+  -e CONFIG_FILE=$CONTAINER_CONF_DIR/$CONF_FILE_NAME \
+  $DOCKER_IMAGE \
+  node src/runBots.js
+#  npm run --silent bots
+
+
+  #-e WETH_TOKEN_ADDRESS=$WETH_TOKEN_ADDRESS \
+  #-e RDN_TOKEN_ADDRESS=$RDN_TOKEN_ADDRESS \

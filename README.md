@@ -20,91 +20,23 @@ If you follow through, you'll get:
     * To check the state of the auctions
     * To interact with the DX: Claim, buy, sell, etc.
 
-For additional information and for reference, check out the following
-repositories:
-
-* [Gnosis Blog](https://blog.gnosis.pm/tagged/dutchx): Learn about DutchX in
-Gnosis Blog, were you will find a series of posts about it.
-* [Github: dx-examples-api](https://github.com/gnosis/dx-examples-api):
-Example project and documentation on how to use the DutchX API.
-* [Github: dx-contracts](https://github.com/gnosis/dx-contracts): Smart
-contracts of the Duch X
-* [Github: dx-services](https://github.com/gnosis/dx-services): Services,
-repositories and bots to interact with DX.
-* [Github: dx-react](https://github.com/gnosis/dx-react): Front end web
-application for the DutchX seller interface
+# Documentation
+Checkout the [DutchX Documentation](http://dutchx.readthedocs.io/en/latest).
 
 # Run the bots
-**Create the running script**:
-Create a config file for the bots:
-```javascript
-const MARKETS = [
-  { tokenA: 'WETH', tokenB: 'RDN' }
-]
-const BUY_LIQUIDITY_RULES_DEFAULT = [
-  // Buy 1/2 if price falls below 99%
+An easy way to run the bots is to fork this project, or create a blank one with:
+1. The config for the bots
+2. The script to run the bots
 
-  {
-    marketPriceRatio: {
-      numerator: 99,
-      denominator: 100
-    },
-    buyRatio: {
-      numerator: 1,
-      denominator: 2
-    }
-  },
-
-  // Buy the 100% if price falls below 96%
-  {
-    marketPriceRatio: {
-      numerator: 96,
-      denominator: 100
-    },
-    buyRatio: {
-      numerator: 1,
-      denominator: 1
-    }
-  }
-]
-
-const MAIN_BOT_ACCOUNT = 0
-
-const BUY_LIQUIDITY_BOTS = [{
-  name: 'Main buyer bot',
-  markets: MARKETS,
-  accountIndex: MAIN_BOT_ACCOUNT,
-  rules: BUY_LIQUIDITY_RULES_DEFAULT,
-  notifications: [{
-    type: 'slack',
-    channel: '' // If none provided uses SLACK_CHANNEL_BOT_TRANSACTIONS
-  }]
-}]
-
-const SELL_LIQUIDITY_BOTS = [{
-  name: 'Main seller bot',
-  markets: MARKETS,
-  accountIndex: MAIN_BOT_ACCOUNT,
-  notifications: [{
-    type: 'slack',
-    channel: '' // If none provided uses SLACK_CHANNEL_BOT_TRANSACTIONS
-  }]
-}]
-
-module.exports = {
-  MARKETS,
-  BUY_LIQUIDITY_RULES_DEFAULT,
-  MAIN_BOT_ACCOUNT,
-  BUY_LIQUIDITY_BOTS,
-  SELL_LIQUIDITY_BOTS
-}
-```
+## 1. Create the config file for the bots
+Create a config file for the bots, like the one in 
+[conf/bots.js](./conf/bots.js), where:
 
 * `MARKETS`: List of the ERC20 token pairs you want the bots to watch.
   * Format: `<token1>-<token2>[,<tokenN>-<tokenM>]*`
   * Example: `WETH-RDN,WETH-OMG`
   * It's important that for every distinct token provided, you also provide the
-  address, the can be passed either in the config file or as ENV_VAR as we will see later:
+  address, the can be passed either in the config file or as ENV_VAR:
   * **WETH_TOKEN_ADDRESS**: `0xc58b96a0278bd2c77bc93e01b148282fb8e753a5`
   * **RDN_TOKEN_ADDRESS**: `0x3615757011112560521536258c1e7325ae3b48ae`
   * **OMG_TOKEN_ADDRESS**: `0x00df91984582e6e96288307e9c2f20b38c8fece9`
@@ -119,32 +51,9 @@ module.exports = {
   * **notifications**: The notification system to be used by the bot. For now only `slack` is available
 * `SELL_LIQUIDITY_BOTS`: Same parameters as `BUY_LIQUIDITY_BOTS` except the don't need **rules**
 
-Create a script `run-bots` with the following content:
 
-```bash
-#!/usr/bin/env bash
-
-docker run \
-  -p 8081:8081 \
-  -e MNEMONIC="super secret thing that nobody should know" \
-  -e ETHEREUM_RPC_URL=https://rinkeby.infura.io \
-  -e WETH_TOKEN_ADDRESS=0xc58b96a0278bd2c77bc93e01b148282fb8e753a5 \
-  -e RDN_TOKEN_ADDRESS=0x3615757011112560521536258c1e7325ae3b48ae \
-  -e NODE_ENV=dev \
-  -e NETWORK=rinkeby \
-  --mount source=./conf,destination=/usr/src/app/custom_conf \
-  -e CONFIG_FILE=/usr/src/app/custom_conf/bots.js \
-  gnosispm/dx-services:staging \
-  npm run bots
-
-
-#   -e MARKETS=WETH-RDN,WETH-OMG \
-#   -e WETH_TOKEN_ADDRESS=0xc58b96a0278bd2c77bc93e01b148282fb8e753a5 \
-#   -e RDN_TOKEN_ADDRESS=0x3615757011112560521536258c1e7325ae3b48ae \
-#   -e OMG_TOKEN_ADDRESS=0x00df91984582e6e96288307e9c2f20b38c8fece9
-```
-
-> You can use [this one](./run-bots) as a template.
+## 2. Create the run script
+Create a script `run-bots` similar to [run-bots](./run-bots) script.
 
 Fill the environment variables with your own configuration:
 
