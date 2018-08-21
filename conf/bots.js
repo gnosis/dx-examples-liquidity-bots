@@ -46,7 +46,8 @@ const BUY_LIQUIDITY_BOTS = [{
   notifications: [{
     type: 'slack',
     channel: '' // If none provided uses SLACK_CHANNEL_BOT_TRANSACTIONS
-  }]
+  }],
+  checkTimeInMilliseconds: 10 * 1000 // 60s
 }]
 
 // Sell Bots
@@ -57,18 +58,39 @@ const SELL_LIQUIDITY_BOTS = [{
   notifications: [{
     type: 'slack',
     channel: '' // If none provided uses SLACK_CHANNEL_BOT_TRANSACTIONS
-  }]
+  }],
+  checkTimeInMilliseconds: 60 * 1000 // 60s
 }]
 
-// Bots API Port
-BOTS_API_PORT=8081
+const EXCHANGE_PRICE_FEED_STRATEGIES_DEFAULT = {
+  strategy: 'sequence', // TODO: More strategies can be implemented. i.e. averages, median, ponderated volumes, ...
+  feeds: ['binance', 'huobi', 'kraken', 'bitfinex']
+}
 
+const EXCHANGE_PRICE_FEED_STRATEGIES = {
+  'WETH-RDN': {
+    strategy: 'sequence',
+    feeds: ['huobi', 'binance', 'bitfinex']
+  }
+}
+
+
+// Bots API Port
+BOTS_API_PORT = 8081
 
 module.exports = {
+  // Market and tokens
   MARKETS,
   ...TOKEN_ADDRESSES,
-  BUY_LIQUIDITY_RULES_DEFAULT,
+
+  // Bot config
   MAIN_BOT_ACCOUNT,
+  BUY_LIQUIDITY_RULES_DEFAULT,
   BUY_LIQUIDITY_BOTS,
   SELL_LIQUIDITY_BOTS,
+  BOTS_API_PORT,
+
+  // Price feed config
+  EXCHANGE_PRICE_FEED_STRATEGIES_DEFAULT,
+  EXCHANGE_PRICE_FEED_STRATEGIES,
 }
