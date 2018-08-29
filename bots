@@ -1,6 +1,5 @@
-APP_NAME="CLI"
-CLI_PARAMS=${@:--h}
-APP_COMMAND="node src/cli/cli.js $CLI_PARAMS"
+APP_COMMAND="node src/runBots.js"
+APP_NAME="bots"
 
 # Base command: Pulls the docker image and run the app command
 source ./base-command

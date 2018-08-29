@@ -25,18 +25,18 @@ CONF_FILE_NAME=bots.js
 
 DOCKER_IMAGE="gnosispm/dx-services:$DX_SERVICE_VERSION"
 
-
 echo
-echo "  *********  DutchX Bots - $DX_SERVICE_VERSION  *********"
+echo "  *********  DutchX $APP_NAME - $DX_SERVICE_VERSION  *********"
 echo "    Docker image: $DOCKER_IMAGE"
 echo "    Config file: ./$CONF_DIR/$CONF_FILE_NAME"
+echo "    Run command: $APP_COMMAND"
 echo "  *********************************"
 echo
-echo "[bots] Getting docker image: $DOCKER_IMAGE..."
+echo "[$APP_NAME] Getting docker image: $DOCKER_IMAGE..."
 docker pull $DOCKER_IMAGE
 
 echo
-echo "[bots] Running bots..."
+echo "[$APP_NAME] Run docker..."
 CONTAINER_CONF_DIR=/usr/src/app/custom_conf
 docker run \
   -p 8081:8081 \
@@ -50,7 +50,7 @@ docker run \
   --mount type=bind,source="$(pwd)"/$CONF_DIR,destination=$CONTAINER_CONF_DIR \
   -e CONFIG_FILE=$CONTAINER_CONF_DIR/$CONF_FILE_NAME \
   $DOCKER_IMAGE \
-  node src/runBots.js
+  $APP_COMMAND
 #  npm run --silent bots
 
 
