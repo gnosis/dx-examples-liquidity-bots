@@ -122,8 +122,7 @@ Once you have the **bot account**, your **secret mnemonic** and the
 
 > The easiest way is to use the **DutchX CLI**.
 >
-> Check out the **Deposit** section in [DutchX Cli page](./docs/cli.md)
-
+> Check out the **Deposit** section in [https://github.com/gnosis/dx-cli](https://github.com/gnosis/dx-cli)
 
 # DutchX CLI (Command Line Interface)
 In the docker image, it's also avaliable a CLI, with some basic operations for
@@ -133,9 +132,9 @@ You can use it for getting the state of a token pair, or to trade in an auction
 among other things.
 
 > Checkout the cli documentation to learn how to use it.
-> * [DutchX Cli page](./docs/cli.md)
-> * Also, you can create a **cli** script, the same way we did in the `run-bots`
-> script. You can use [this one](./cli) as a template.
+> * [https://github.com/gnosis/dx-cli](https://github.com/gnosis/dx-cli)
+
+This sample project also provides a simple [CLI script](./cli) you can use.
 
 ## State of a DutchX Auction
 There's a basic command in the CLI that is very helpful to get the state of the
