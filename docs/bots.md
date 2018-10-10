@@ -1,7 +1,7 @@
 # DutchX Bots
 When we start the application, it will start also 3 bots.
 
-Every bot is createad with one goal, so once they are up, the will try to do
+Every bot is created with one goal, so once they are up, the will try to do
 their jobs.
 
 # Sell Liquidity Bot
@@ -33,13 +33,20 @@ is at a right price.
 ## How does the bot know what is the market price?
 Right now the buy bot can check in any of these exchanges:
 
-* [binance](https://www.binance.com)
-* [huobi](https://www.huobi.pro/es-es/)
-* [kraken](https://www.kraken.com/)
-* [bitfinex](https://www.bitfinex.com/)
+* **Binance**: https://www.binance.com
+* **Bitfinex**: https://www.bitfinex.com/
+* **HitBTC**: https://hitbtc.com/
+* **Huobi**: https://www.huobi.com
+* **Kraken**: http://kraken.com
+* **Liquid**: https://www.liquid.com/
 
 Depending on the token pair, we can configure an strategy for getting the
 market price.
+
+If you consider that none of these exchanges fits to your needs you can make a
+pull request and add a new one. Check here
+[how to add a price feed](https://dutchx.readthedocs.io/en/latest/add-price-feed.html)
+
 
 ## Strategies for getting the price - Sequence
 The current strategy implemented by the buy bot is called `sequence`, but more
