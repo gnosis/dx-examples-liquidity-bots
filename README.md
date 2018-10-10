@@ -22,6 +22,8 @@ If you follow through, you'll get:
 
 # Documentation
 Checkout the [DutchX Documentation](http://dutchx.readthedocs.io/en/latest).
+You can also check how to request a new price feed if you need it
+[Adding a price feed](https://dutchx.readthedocs.io/en/latest/add-price-feed.html)
 
 # Run the bots
 An easy way to run the bots is to fork this project, or create a blank one with:
@@ -115,7 +117,7 @@ An easy way to know the address is just to visit the about endpoint:
 
 You should see among other information, the accounts used by the bots:
 
-![alt text](./docs/img/bot-account.png "Get the account of the bors")
+![alt text](./docs/img/bot-account.png "Get the account of the bots")
 
 Once you have the **bot account**, your **secret mnemonic** and the
 **bots running**, you are all set for the funding.
@@ -125,13 +127,13 @@ Once you have the **bot account**, your **secret mnemonic** and the
 > Check out the **Deposit** section in [https://github.com/gnosis/dx-cli](https://github.com/gnosis/dx-cli)
 
 # DutchX CLI (Command Line Interface)
-In the docker image, it's also avaliable a CLI, with some basic operations for
+In the docker image, it's also available a CLI, with some basic operations for
 using the DutchX.
 
 You can use it for getting the state of a token pair, or to trade in an auction
 among other things.
 
-> Checkout the cli documentation to learn how to use it.
+> Checkout the CLI documentation to learn how to use it.
 > * [https://github.com/gnosis/dx-cli](https://github.com/gnosis/dx-cli)
 
 This sample project also provides a simple [CLI script](./cli) you can use.
