@@ -33,11 +33,12 @@ is at a right price.
 ## How does the bot know what is the market price?
 Right now the buy bot can check in any of these exchanges:
 
-* [binance](https://www.binance.com)
-* [huobi](https://www.huobi.pro/es-es/)
-* [kraken](https://www.kraken.com/)
-* [bitfinex](https://www.bitfinex.com/)
-* [hitbtc](https://hitbtc.com)
+* **Binance**: https://www.binance.com
+* **Bitfinex**: https://www.bitfinex.com/
+* **HitBTC**: https://hitbtc.com/
+* **Huobi**: https://www.huobi.com
+* **Kraken**: http://kraken.com
+* **Liquid**: https://www.liquid.com/
 
 Depending on the token pair, we can configure an strategy for getting the
 market price.
