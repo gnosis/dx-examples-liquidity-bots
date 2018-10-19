@@ -1,4 +1,5 @@
 // Markets
+const DEFAULT_GAS_PRICE_USED = 'fast' // safeLow, average, fast
 const MARKETS = [
   { tokenA: 'WETH', tokenB: 'RDN' }
 ]
@@ -82,6 +83,7 @@ module.exports = {
   // Market and tokens
   MARKETS,
   ...TOKEN_ADDRESSES,
+  DEFAULT_GAS_PRICE_USED,
 
   // Bot config
   MAIN_BOT_ACCOUNT,
