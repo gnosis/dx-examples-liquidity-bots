@@ -45,7 +45,7 @@ market price.
 
 If you consider that none of these exchanges fits to your needs you can make a
 pull request and add a new one. Check here
-[how to add a price feed](https://dutchx.readthedocs.io/en/latest/add-price-feed.html)
+[how to add a price feed](https://dutchx.readthedocs.io/en/latest/bots-price-feed.html)
 
 
 ## Strategies for getting the price - Sequence

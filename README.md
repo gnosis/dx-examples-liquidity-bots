@@ -23,7 +23,7 @@ If you follow through, you'll get:
 # Documentation
 Checkout the [DutchX Documentation](http://dutchx.readthedocs.io/en/latest).
 You can also check how to request a new price feed if you need it
-[Adding a price feed](https://dutchx.readthedocs.io/en/latest/add-price-feed.html)
+[Adding a price feed](https://dutchx.readthedocs.io/en/latest/bots-price-feed.html)
 
 # Run the bots
 An easy way to run the bots is to fork this project, or create a blank one with:
