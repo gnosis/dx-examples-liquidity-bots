@@ -155,7 +155,7 @@ We would get something similar to:
 > For other methods, or to learn how to use the CLI go to:
 > * [DutchX Cli page](./docs/cli.md)
 
-# Dutchx Bots
+# DutchX Bots
 There are 3 bots:
 
 * `SellLiquidityBot`
